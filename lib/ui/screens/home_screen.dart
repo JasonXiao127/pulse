@@ -10,10 +10,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: const Text('My Offline Game Launcher'),
         centerTitle: true,
-      ),
+      ), */
       body: ListenableBuilder(
         listenable: provider,
         builder: (context, child) {
