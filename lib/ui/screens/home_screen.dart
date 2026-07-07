@@ -10,10 +10,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        title: const Text('My Offline Game Launcher'),
-        centerTitle: true,
-      ), */
       body: ListenableBuilder(
         listenable: provider,
         builder: (context, child) {
@@ -31,16 +27,26 @@ class HomeScreen extends StatelessWidget {
             );
           }
 
-          return ListView.builder(
-            itemCount: provider.games.length,
-            itemBuilder: (context, index) {
-              final game = provider.games[index];
-              return GameCard(
-                game: game,
-                onPlay: () => provider.playGame(game),
-                onDelete: () => provider.removeGame(game.id),
-              );
-            },
+          // Grid with square cards to preserve the 256x256 icon aspect ratio
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 280,      // max width per card
+                childAspectRatio: 1.0,         // square cards
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+              itemCount: provider.games.length,
+              itemBuilder: (context, index) {
+                final game = provider.games[index];
+                return GameCard(
+                  game: game,
+                  onPlay: () => provider.playGame(game),
+                  onDelete: () => provider.removeGame(game.id),
+                );
+              },
+            ),
           );
         },
       ),
