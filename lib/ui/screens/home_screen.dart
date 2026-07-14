@@ -18,11 +18,14 @@ class HomeScreen extends StatelessWidget {
           }
 
           if (provider.games.isEmpty) {
-            return const Center(
+            return Center(
               child: Text(
                 'No games added yet.\nClick the "+" button to add an .exe game.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             );
           }

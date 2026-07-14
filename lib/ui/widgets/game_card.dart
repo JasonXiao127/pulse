@@ -29,6 +29,9 @@ class _GameCardState extends State<GameCard> {
         ? FileImage(File(widget.game.imagePath!)) as ImageProvider
         : null;
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovering = true),
       onExit: (_) => setState(() => _isHovering = false),
@@ -41,19 +44,19 @@ class _GameCardState extends State<GameCard> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[900], // fallback background
+                color: colorScheme.surfaceContainerHighest,
                 image: imageProvider != null
                     ? DecorationImage(
                         image: imageProvider,
-                        fit: BoxFit.cover, // cover the square, no stretching
+                        fit: BoxFit.cover,
                       )
                     : null,
               ),
               child: imageProvider == null
-                  ? const Icon(
+                  ? Icon(
                       Icons.sports_esports,
                       size: 80,
-                      color: Colors.white54,
+                      color: colorScheme.onSurfaceVariant,
                     )
                   : null,
             ),
@@ -64,7 +67,7 @@ class _GameCardState extends State<GameCard> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: Colors.black,
+                  color: colorScheme.shadow.withValues(alpha: 0.8),
                 ),
               ),
             ),
@@ -76,18 +79,18 @@ class _GameCardState extends State<GameCard> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: colorScheme.primaryContainer.withValues(alpha: 0.95),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.play_arrow, color: Colors.black),
-                      SizedBox(width: 8),
+                      Icon(Icons.play_arrow, color: colorScheme.onPrimaryContainer),
+                      const SizedBox(width: 8),
                       Text(
                         'PLAY',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: colorScheme.onPrimaryContainer,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -113,7 +116,7 @@ class _GameCardState extends State<GameCard> {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.transparent,
-                      Colors.black.withOpacity(0.8),
+                      colorScheme.surface.withValues(alpha: 0.9),
                     ],
                   ),
                 ),
@@ -123,8 +126,8 @@ class _GameCardState extends State<GameCard> {
                   children: [
                     Text(
                       widget.game.title,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -134,8 +137,8 @@ class _GameCardState extends State<GameCard> {
                     const SizedBox(height: 2),
                     Text(
                       widget.game.exePath,
-                      style: const TextStyle(
-                        color: Colors.white70,
+                      style: TextStyle(
+                        color: colorScheme.onSurfaceVariant,
                         fontSize: 11,
                       ),
                       maxLines: 1,
@@ -150,9 +153,9 @@ class _GameCardState extends State<GameCard> {
               top: 8,
               right: 8,
               child: IconButton(
-                icon: const Icon(Icons.delete, color: Colors.white, size: 20),
+                icon: Icon(Icons.delete, color: colorScheme.onErrorContainer, size: 20),
                 style: IconButton.styleFrom(
-                  backgroundColor: Colors.redAccent.withOpacity(0.8),
+                  backgroundColor: colorScheme.errorContainer,
                   padding: const EdgeInsets.all(6),
                   minimumSize: const Size(32, 32),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'providers/game_provider.dart';
 import 'ui/screens/home_screen.dart';
+import 'ui/theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,11 +30,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Game Launcher',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: AppTheme.darkTheme,
       home: HomeScreen(provider: _gameProvider),
     );
   }
